@@ -5,8 +5,12 @@
     <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
     <style>
         body {
-            background-color: #9508a1; /* Your Ranch Green */
-            font-family: 'VT323', monospace; /* Terminal Modern Style */
+            background-color: #0000003b; /* Fallback color */
+            background-image: url('terminalscreen.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            font-family: 'DEC Terminal Modern', 'VT323', monospace; /* Preferred DEC Terminal Modern */
             color: #E0E0E0;
             margin: 0;
             padding: 20px;
@@ -24,7 +28,7 @@
         h1 {
             text-align: center;
             font-size: 4em;
-            color: #FFD700; /* Gold */
+            color: #00c3ff;
             text-shadow: 3px 3px 0px rgba(0,0,0,0.7);
             background-color: rgba(0, 0, 0, 0.4);
             padding: 20px;
@@ -34,7 +38,7 @@
         }
 
         h2 {
-            color: #FFD700;
+            color: #00c3ff;
             font-size: 2.2em;
             background-color: rgba(0, 0, 0, 0.4);
             padding: 5px 15px;
@@ -87,7 +91,7 @@
         <h1>El Rancho de SandMan</h1>
 
         <div class="content-box">
-            <h2>Message of the Day</h2>
+            <h2>M.O.T.D</h2>
             <p>Welcome to El Rancho</p>
             <ul>
                 <li>I'm doing some major reworks to the UI and adding stuff!</li>
@@ -114,10 +118,8 @@
                 <li>SandMan — Owner</li>
             </ul>
         </div>
-
         <div class="footer">
-            <img class="gif-img" src="https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif" alt="Dancing Tony">
-        </div>
+            <img src="res/dancingtony.gif" alt="Dancing Tony" class="gif-img">
     </div>
 </body>
 </html>
