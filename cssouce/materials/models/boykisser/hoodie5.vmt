@@ -1,0 +1,5 @@
+"VertexlitGeneric"
+{
+	"$basetexture" "models/boykisser/Hoodie5"
+	"$selfillum" 1
+}
