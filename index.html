@@ -36,7 +36,7 @@
             width: min(1000px, calc(100% - 32px));
             padding: 32px;
             border: 1px solid rgba(255,255,255,0.08);
-            border-radius: 20px;
+            border-radius: 12px;
             overflow: hidden;
             backdrop-filter: blur(12px);
             box-shadow: 0 0 70px rgba(0, 0, 0, 0.45);
@@ -60,7 +60,7 @@
 
         .status-pill {
             padding: 10px 18px;
-            border-radius: 999px;
+            border-radius: 16px;
             background: rgba(0, 204, 255, 0.14);
             border: 1px solid rgba(0, 204, 255, 0.28);
             color: #b8f7ff;
@@ -71,7 +71,7 @@
 
         .info-grid {
             display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
+            grid-template-columns: 1fr;
             gap: 18px;
             margin-bottom: 28px;
         }
@@ -80,7 +80,7 @@
             padding: 18px 20px;
             background: rgba(16, 27, 51, 0.9);
             border: 1px solid rgba(255,255,255,0.08);
-            border-radius: 16px;
+            border-radius: 10px;
             min-height: 112px;
         }
 
@@ -98,7 +98,7 @@
         }
 
         .progress-wrapper {
-            border-radius: 18px;
+            border-radius: 10px;
             background: rgba(255,255,255,0.06);
             overflow: hidden;
             border: 1px solid rgba(255,255,255,0.12);
@@ -129,7 +129,7 @@
 
         .tip-card {
             padding: 18px 20px;
-            border-radius: 16px;
+            border-radius: 10px;
             border: 1px solid rgba(255,255,255,0.1);
             background: rgba(4, 11, 29, 0.9);
             min-height: 110px;
@@ -178,22 +178,14 @@
     <div class="overlay"></div>
     <div class="screen">
         <div class="headline">
-            <div class="server-title">Lo Que Pinte Gaming - Homigrad</div>
+            <div class="server-title">Lo Que Pinte Gaming</div>
             <div class="status-pill" id="connection-status">Conectandose...</div>
         </div>
 
         <div class="info-grid">
             <div class="info-box">
                 <div class="info-title">Server</div>
-                <div class="info-value" id="server-name">Lo Que Pinte Gaming</div>
-            </div>
-            <div class="info-box">
-                <div class="info-title">Map</div>
-                <div class="info-value" id="map-name">gm_flatgrass</div>
-            </div>
-            <div class="info-box">
-                <div class="info-title">Players</div>
-                <div class="info-value" id="player-count">0 / 32</div>
+                <div class="info-value" id="server-name">Lo Que Pinte Gaming - Homigrad</div>
             </div>
         </div>
 
@@ -208,20 +200,21 @@
         <div class="tips">
             <div class="tip-card">
                 <div class="tip-title">Tip</div>
-                <div class="tip-text">Use <span style="color:#8df1ff;">!menu</span> to open the server command menu and check active events.</div>
+                <div class="tip-text">Sabias Que Puedes Acceder Al menu de Outfitter y Pac3 Con la Tecla <span style="color:#8df1ff;">M</span> .</div>
+                <div class="tip-text">Quieres Crear un Voto? Escribe <span style="color:#8df1ff;">!menu</span> !menu </div>
+                <div class="tip-text">Quieres Cambiar de Mapa? Escribe <span style="color:#8df1ff;">!menu</span> !rtv </div>
             </div>
             <div class="tip-card">
                 <div class="tip-title">Reglas del Server</div>
-                <div class="tip-text">No Usar Skins NSFW y No Abusar del Pac3.</div>
-            </div>
-            <div class="tip-card">
-                <div class="tip-title">Player List</div>
-                <div class="tip-text" id="player-list">No players yet</div>
+                <div class="tip-text">No Usar Skins NSFW y No Abusar del Pac3. (SIN EXEPCIONES!)</div>
+                <div class="tip-text">El Mic Spam Esta Permitido a Cierto Punto. Pero eso no significa que puedes ir saturando mic todo el rato</div>
+                <div class="tip-text">No Abusar de Bugs del Mapa. (El Castigo es Ser Explotado.)</div>
+                <div class="tip-text">No Hacer RDM a Tus Compañeros en modo TDM!</div>
             </div>
         </div>
 
         <div class="footer">
-            <div>Need help? Join Discord or contact staff.</div>
+            <div>Necesitas Ayuda? Unite al Server De Discord o Preguntale al Staff!.</div>
         </div>
     </div>
 
@@ -231,10 +224,7 @@
         const progressLabel = document.getElementById('progress-label');
         const progressPercent = document.getElementById('progress-percent');
         const connectionStatus = document.getElementById('connection-status');
-        const playerCount = document.getElementById('player-count');
         const serverNameEl = document.getElementById('server-name');
-        const mapNameEl = document.getElementById('map-name');
-        const playerListEl = document.getElementById('player-list');
         const bgMusic = document.getElementById('bg-music');
 
         const musicTracks = [
@@ -275,39 +265,13 @@
             setInterval(cycleBackground, 4500);
         }
 
-        let hasPlayerData = false;
-
         function readQueryData() {
             const params = new URLSearchParams(window.location.search);
             const server = params.get('server');
-            const map = params.get('map');
-            const playersRaw = params.get('players');
-            const countParam = params.get('playercount');
-            const maxPlayers = params.get('maxplayers') || 32;
 
             if (server) {
                 serverNameEl.textContent = server;
             }
-            if (map) {
-                mapNameEl.textContent = map;
-            }
-
-            let players = [];
-            if (playersRaw) {
-                try {
-                    const parsed = JSON.parse(playersRaw);
-                    if (Array.isArray(parsed)) {
-                        players = parsed;
-                    }
-                } catch (err) {
-                    players = playersRaw.split(',').map(name => name.trim()).filter(Boolean);
-                }
-            }
-
-            const count = players.length || Number(countParam) || 0;
-            playerCount.textContent = `${count} / ${maxPlayers}`;
-            playerListEl.textContent = players.length ? players.join(', ') : 'No players yet';
-            hasPlayerData = players.length > 0 || !!countParam;
         }
 
         const steps = [
@@ -357,22 +321,11 @@
             requestAnimationFrame(animate);
         }
 
-        function simulatePlayerCount() {
-            let count = 3;
-            setInterval(() => {
-                count = Math.min(32, count + Math.floor(Math.random() * 2));
-                playerCount.textContent = `${count} / 32`;
-            }, 2400);
-        }
-
         connectionStatus.textContent = 'Connecting...';
         setProgress(4);
         readQueryData();
         chooseBackgroundMusic();
         startBackgroundCycle();
-        if (!hasPlayerData) {
-            simulatePlayerCount();
-        }
         nextStep();
     </script>
 </body>
