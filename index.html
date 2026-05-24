@@ -16,7 +16,7 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             color: #ffffff;
             background-color: #0b1220;
-            background-image: linear-gradient(135deg, rgba(9, 15, 36, 0.96), rgba(25, 34, 66, 0.96)), url('res/loadingscreens/backimg10.png');
+            background-image: linear-gradient(135deg, rgba(9, 15, 36, 0.96), rgba(25, 34, 66, 0.96)), url('./res/loadingscreens/backimg10.png');
             background-size: cover;
             background-position: center;
             display: flex;
@@ -163,6 +163,25 @@
             font-weight: 600;
         }
 
+        .music-button {
+            margin-top: 14px;
+            display: none;
+        }
+
+        .music-button button {
+            padding: 10px 16px;
+            border: 1px solid rgba(255,255,255,0.14);
+            background: rgba(0, 148, 235, 0.16);
+            color: #e8f6ff;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 0.95rem;
+        }
+
+        .music-button button:hover {
+            background: rgba(0, 148, 235, 0.24);
+        }
+
         @media (max-width: 720px) {
             .info-grid {
                 grid-template-columns: 1fr;
@@ -216,9 +235,12 @@
         <div class="footer">
             <div>Necesitas Ayuda? Unite al Server De Discord o Preguntale al Staff!.</div>
         </div>
+        <div class="music-button" id="music-button">
+            <button type="button" id="music-enable">Enable music</button>
+        </div>
     </div>
 
-    <audio id="bg-music" autoplay loop></audio>
+    <audio id="bg-music" preload="auto" loop></audio>
     <script>
         const progressBar = document.getElementById('progress-bar');
         const progressLabel = document.getElementById('progress-label');
@@ -228,8 +250,8 @@
         const bgMusic = document.getElementById('bg-music');
 
         const musicTracks = [
-            'res/loadingscreens/song1.mp3',
-            'res/loadingscreens/song2.ogg'
+            './res/loadingscreens/song1.mp3',
+            './res/loadingscreens/song2.ogg'
         ];
 
         function chooseBackgroundMusic() {
@@ -237,22 +259,25 @@
             bgMusic.src = track;
             bgMusic.volume = 0.35;
             bgMusic.play().catch(() => {
-                // Autoplay may be blocked in browser context; keep it ready.
+                const musicButton = document.getElementById('music-button');
+                if (musicButton) {
+                    musicButton.style.display = 'block';
+                }
             });
         }
 
         const backgroundImages = [
-            'res/loadingscreens/backimg.jpg',
-            'res/loadingscreens/backimg2.jpg',
-            'res/loadingscreens/backimg3.jpg',
-            'res/loadingscreens/backimg4.jpg',
-            'res/loadingscreens/backimg5.jpg',
-            'res/loadingscreens/backimg6.jpg',
-            'res/loadingscreens/backimg7.jpg',
-            'res/loadingscreens/backimg8.jpg',
-            'res/loadingscreens/backimg9.jpg',
-            'res/loadingscreens/backimg10.png',
-            'res/loadingscreens/backimg11.jpg'
+            './res/loadingscreens/backimg.jpg',
+            './res/loadingscreens/backimg2.jpg',
+            './res/loadingscreens/backimg3.jpg',
+            './res/loadingscreens/backimg4.jpg',
+            './res/loadingscreens/backimg5.jpg',
+            './res/loadingscreens/backimg6.jpg',
+            './res/loadingscreens/backimg7.jpg',
+            './res/loadingscreens/backimg8.jpg',
+            './res/loadingscreens/backimg9.jpg',
+            './res/loadingscreens/backimg10.png',
+            './res/loadingscreens/backimg11.jpg'
         ];
         let currentBackground = 0;
 
@@ -326,6 +351,17 @@
         readQueryData();
         chooseBackgroundMusic();
         startBackgroundCycle();
+
+        const enableMusicButton = document.getElementById('music-enable');
+        if (enableMusicButton) {
+            enableMusicButton.addEventListener('click', () => {
+                bgMusic.play().catch(() => {
+                    // Still blocked, nothing more to do.
+                });
+                enableMusicButton.parentElement.style.display = 'none';
+            });
+        }
+
         nextStep();
     </script>
 </body>
