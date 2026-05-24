@@ -163,24 +163,7 @@
             font-weight: 600;
         }
 
-        .music-button {
-            margin-top: 14px;
-            display: none;
-        }
-
-        .music-button button {
-            padding: 10px 16px;
-            border: 1px solid rgba(255,255,255,0.14);
-            background: rgba(0, 148, 235, 0.16);
-            color: #e8f6ff;
-            border-radius: 10px;
-            cursor: pointer;
-            font-size: 0.95rem;
-        }
-
-        .music-button button:hover {
-            background: rgba(0, 148, 235, 0.24);
-        }
+        /* removed manual music enable UI - autoplay will be attempted programmatically */
 
         @media (max-width: 720px) {
             .info-grid {
@@ -235,12 +218,9 @@
         <div class="footer">
             <div>Necesitas Ayuda? Unite al Server De Discord o Preguntale al Staff!.</div>
         </div>
-        <div class="music-button" id="music-button">
-            <button type="button" id="music-enable">Enable music</button>
-        </div>
     </div>
 
-    <audio id="bg-music" preload="auto" loop></audio>
+    <audio id="bg-music" preload="auto" loop autoplay playsinline></audio>
     <script>
         const progressBar = document.getElementById('progress-bar');
         const progressLabel = document.getElementById('progress-label');
@@ -258,12 +238,35 @@
             const track = musicTracks[Math.floor(Math.random() * musicTracks.length)];
             bgMusic.src = track;
             bgMusic.volume = 0.35;
-            bgMusic.play().catch(() => {
-                const musicButton = document.getElementById('music-button');
-                if (musicButton) {
-                    musicButton.style.display = 'block';
-                }
-            });
+
+            // Attempt aggressive autoplay:
+            // 1) Try play unmuted
+            // 2) If blocked, try play muted then unmute after playback starts
+            // 3) Retry a few times spaced out
+            let attempts = 0;
+            function attemptPlay() {
+                attempts++;
+                bgMusic.muted = false;
+                bgMusic.play().then(() => {
+                    // playing succeeded unmuted
+                    bgMusic.muted = false;
+                }).catch(() => {
+                    // try playing muted, then unmute after it starts
+                    bgMusic.muted = true;
+                    bgMusic.play().then(() => {
+                        // try unmuting after small delay
+                        setTimeout(() => {
+                            try { bgMusic.muted = false; } catch (e) {}
+                        }, 300);
+                    }).catch(() => {
+                        if (attempts < 6) {
+                            setTimeout(attemptPlay, 600);
+                        }
+                    });
+                });
+            }
+
+            attemptPlay();
         }
 
         const backgroundImages = [
@@ -352,15 +355,7 @@
         chooseBackgroundMusic();
         startBackgroundCycle();
 
-        const enableMusicButton = document.getElementById('music-enable');
-        if (enableMusicButton) {
-            enableMusicButton.addEventListener('click', () => {
-                bgMusic.play().catch(() => {
-                    // Still blocked, nothing more to do.
-                });
-                enableMusicButton.parentElement.style.display = 'none';
-            });
-        }
+        // manual enable button removed; autoplay retry will run above
 
         nextStep();
     </script>
