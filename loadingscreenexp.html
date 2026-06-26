@@ -56,7 +56,7 @@
         /* --- CENTERED UI WRAPPER --- */
         .center-ui {
             position: absolute;
-            top: 50%;
+            top: 42%; /* Changed from 50% to 42% to lift the elements higher up the screen */
             left: 50%;
             transform: translate(-50%, -50%);
             z-index: 5; 
@@ -68,8 +68,8 @@
 
         /* Steam Avatar Image */
         .avatar {
-            width: 140px;
-            height: 140px;
+            width: 120px;
+            height: 120px;
             border-radius: 10px;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
             border: 2px solid rgba(255, 255, 255, 0.2);
@@ -77,8 +77,8 @@
 
         /* --- THE SPINNING GMOD BOX --- */
         .gmod-loader {
-            width: 32px;
-            height: 32px;
+            width: 28px;
+            height: 28px;
             background-color: #ffd1dc; 
             border: 3px solid #ffa3b1;
             display: flex;
@@ -175,7 +175,6 @@
         const container = document.getElementById('slideshow-container');
         const audioPlayer = document.getElementById('bg-music');
 
-        // Helper function to shuffle an array randomly
         function shuffleArray(array) {
             for (let i = array.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
@@ -184,7 +183,6 @@
         }
 
         function setupSlideshow() {
-            // Shuffle the image sequence before building the slideshow elements
             shuffleArray(images);
 
             images.forEach((imgUrl) => {
@@ -222,7 +220,6 @@
             playRandomMusic();
         };
 
-        // Initialize everything instantly on load
         setupSlideshow();
         nextSlide();
         playRandomMusic();
