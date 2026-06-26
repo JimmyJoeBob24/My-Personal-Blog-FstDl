@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -298,3 +299,79 @@
     </script>
 </body>
 </html>
+=======
+<script>
+        // --- CONFIGURATION ---
+        // Paths match your 'res/loadingscreens/' directory exactly
+        const images = [
+            'res/loadingscreens/backimg.jpg',
+            'res/loadingscreens/backimg2.jpg',
+            'res/loadingscreens/backimg3.jpg',
+            'res/loadingscreens/backimg4.jpg',
+            'res/loadingscreens/backimg5.jpg',
+            'res/loadingscreens/backimg6.jpg',
+            'res/loadingscreens/backimg7.jpg',
+            'res/loadingscreens/backimg8.jpg',
+            'res/loadingscreens/backimg9.jpg',
+            'res/loadingscreens/backimg10.png', // Handled the PNG extension here!
+            'res/loadingscreens/backimg11.jpg'
+        ];
+
+        // Your audio tracks
+        const audioTracks = [
+            'res/loadingscreens/song1.mp3',
+            'res/loadingscreens/song2.ogg'
+        ];
+
+        const displayDuration = 6000; // Time per image in milliseconds (6 seconds)
+        // ---------------------
+
+        let currentSlideIndex = 0;
+        const container = document.getElementById('slideshow-container');
+        const audioPlayer = document.getElementById('bg-music');
+        const overlay = document.getElementById('start-overlay');
+
+        function setupSlideshow() {
+            images.forEach((imgUrl) => {
+                const slide = document.createElement('div');
+                slide.classList.add('slide');
+                slide.style.backgroundImage = `url('${imgUrl}')`;
+                container.appendChild(slide);
+            });
+        }
+
+        function playRandomMusic() {
+            if (audioTracks.length === 0) return;
+            const randomIndex = Math.floor(Math.random() * audioTracks.length);
+            audioPlayer.src = audioTracks[randomIndex];
+            
+            audioPlayer.play().catch(error => {
+                console.log("Audio playback failed: ", error);
+            });
+        }
+
+        function nextSlide() {
+            const slides = document.querySelectorAll('.slide');
+            const previousSlide = document.querySelector('.slide.active');
+            
+            if (previousSlide) {
+                previousSlide.classList.remove('active');
+            }
+
+            const currentSlide = slides[currentSlideIndex];
+            currentSlide.classList.add('active');
+
+            currentSlideIndex = (currentSlideIndex + 1) % slides.length;
+
+            setTimeout(nextSlide, displayDuration);
+        }
+
+        function startSlideshow() {
+            overlay.style.display = 'none';
+            playRandomMusic();
+            nextSlide();
+        }
+
+        setupSlideshow();
+    </script>
+>>>>>>> 31788af9f3cabd8b34b2dbd31910da190384817b
