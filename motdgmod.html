@@ -85,77 +85,97 @@
             border: 2px solid #1a1a1a;
             box-shadow: 4px 4px 0px rgba(0,0,0,0.5);
         }
+
+        /* Hide elements by default for localization switching */
+        .lang-en, .lang-es {
+            display: none;
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>SandMan's shenanigans - [PAC3, OUTFITTER & WIRE]</h1>
+        <h1>Lo Que Pinte Gaming - SandBox</h1>
 
-        <div class="content-box">
-            <h2>Mensage of the Day : "Bogos Binted"</h2>
-             <p> </p>
-             <p>Seeing Errors Everywhere?</p>
-              <ul>
-                <li>https://steamcommunity.com/sharedfiles/filedetails/?id=3626045213 - Models & maps</li>
-                <li>https://steamcommunity.com/sharedfiles/filedetails/?id=3626058425 - Vehicles & sweps</li>
+        <!-- ==================== ENGLISH VERSION ==================== -->
+        <div id="motd-en" class="lang-en">
+            <div class="content-box">
+                <h2>Message of the Day : "Bogos Binted"</h2>
+                <p></p>
+                <p>Seeing Errors Everywhere?</p>
+                <ul>
+                    <li>https://steamcommunity.com/sharedfiles/filedetails/?id=3626045213 - Models & maps</li>
+                    <li>https://steamcommunity.com/sharedfiles/filedetails/?id=3626058425 - Vehicles & sweps</li>
+                </ul>
+                <p>Changelog</p>
+                <ul>
+                    <li> New Loading screen </li>
+                </ul>
+            </div>
 
-            </ul>
-            <p>Changelog</p>
-            <ul>
-                <li>Nothin' Here. But i got a bucket of chicken :v </li>
-            </ul>
+            <div class="content-box">
+                <h2>Rules</h2>
+                <ul>
+                    <li>Don't be a Minge / Annoying Jackass</li>
+                    <li>Please Don't Ruin Anyone's Experience. I.e: (Mic Spam, Wire Jail, Prop Push / Prop Kill).</li>
+                    <li>DO NOT CRASH THE SERVER (PERMA BAN).</li>
+                    <li>Absolutely Zero Tolerance to NSFW/NFSL Materials / Sprays.</li>
+                    <li>Please Refrain From abusing of PAC3 or WIREMOD.</li>
+                    <li>No Racism pls</li>
+                    <li>Please Refrain from Harassing Other Players</li>
+                </ul>
+            </div>
         </div>
 
-        <div class="content-box">
-            <h2>Rules</h2>
-            <ul>
-                <li>Don't be a Minge / Annoying Jackass</li>
-                <li>Please Don't Ruin Anyones Experience. Ie: (Mic Spam, Wire Jail, Prop Push / Prop Kill).</li>
-                <li>DO NOT CRASH THE SERVER (PERMA BAN).</li>
-                <li>Absolutely Zero Tolerance to NSFW/NFSL Materials / Sprays.</li>
-                <li>Please Refrain From abusing of PAC3 or WIREMOD.</li>
-                <li>No Racism pls</li>
-                <li>Please Refrain from Harrasing Other Players</li>
-                <li></li>
-            </ul>
+        <!-- ==================== SPANISH VERSION ==================== -->
+        <div id="motd-es" class="lang-es">
+            <div class="content-box">
+                <h2>Mensaje del Día : "Bogos Binted"</h2>
+                <p></p>
+                <p>¿Viendo Errores?</p>
+                <ul>
+                    <li>https://steamcommunity.com/sharedfiles/filedetails/?id=3626045213 - Modelos y mapas</li>
+                    <li>https://steamcommunity.com/sharedfiles/filedetails/?id=3626058425 - Vehículos y sweps</li>
+                </ul>
+                <p>Actualizaciones</p>
+                <ul>
+                    <li>Nueva pantalla de carga :v</li>
+                </ul>
+            </div>
+
+            <div class="content-box">
+                <h2>Reglas</h2>
+                <ul>
+                    <li>No ser imbecil y molestar a los demás</li>
+                    <li>Por favor, no arruines la experiencia de nadie. Ej: (Spam de micrófono, Cárceles con Wire, Prop Push / Prop Kill).</li>
+                    <li>NO CRASHEES EL SERVIDOR (BAN PERMANENTE).</li>
+                    <li>Tolerancia cero absoluta con materiales / sprays NSFW/NFSL.</li>
+                    <li>Por favor, no abusar de PAC3 o WIREMOD.</li>
+                </ul>
+            </div>
         </div>
 
+        <!-- Staff box stays visible for both since it was cut off/incomplete -->
         <div class="content-box">
             <h2>Staff</h2>
             <ul class="staff-list">
-                <li>SandMan — Owner</li>
+                <li>Owner: SandmanMcCoy</li>
+                <li>Co-Owner: N/A</li>
+                <li>Admin: N/A</li>
+                <li>Moderator: N/A</li>
             </ul>
         </div>
 
-        <div class="Special Thanks to ">
-            <h2>Server Info</h2>
-            <ul>
-                <li>Kiba - Beta Tester</li>
-                <li>TuruFerne' — Beta Tester</li>
-                <li>Hersheyys — Beta Tester</li>
-            </ul>
-
-        <div class="content-box">
-            <h2>Comands</h2>
-            <ul>
-                <li><strong>!rtv</strong> - Vote to Change the Current Map</li>
-                <li><strong>!menu</strong> - Open the Command Menu</li>
-                <li><strong>!goto</strong> - Hacerte tp a alguien (Experimented or above required)</li>
-                <li><strong> Put @ Before your Message</strong> - To leave a message to staff</li>
-            </ul>
-        </div>
-
-        <div class="content-box">
-            <h2>User Ranks</h2>
-            <ul>
-                <li><strong>Regular</strong> - Can Be obtained by Being Regularly in the server (atleast 5 Hours of playtime required)</li>
-                <li><strong>Experimented</strong> - Will be Obtained After 8 Hours of Play time</li>
-                <li><strong>Veteran</strong> - Will be given After 3 Days (Total) Of Playtime</li>
-                <li><strong>PAC3 - God</strong> - Will Be Given to You if You are Good With Pac3 or Wiremod ( Unlocks Combat Pac3 Modules & Lifts some Limitations on E2)</li>
-            </ul>
-        </div>
-        <div class="footer">
-            <img src="res/dancingtony.gif" alt="Dancing Tony" class="gif-img">
     </div>
+
+    <!-- Script to auto-detect language -->
+    <script>
+        const userLang = navigator.language || navigator.userLanguage; 
+        
+        if (userLang.startsWith('es')) {
+            document.getElementById('motd-es').style.display = 'block';
+        } else {
+            document.getElementById('motd-en').style.display = 'block'; // Default to English
+        }
+    </script>
 </body>
 </html>
