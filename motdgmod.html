@@ -1,114 +1,31 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>LQPMOTD</title>
-    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
-    <style>
-        body {
-            background-color: #0000003b; /* Fallback color */
-            background-image: url('res/drpepperbk.png');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            font-family: 'DEC Terminal Modern', 'VT323', monospace; /* Preferred DEC Terminal Modern */
-            color: #E0E0E0;
-            margin: 0;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            letter-spacing: 1px;
-        }
-
-        .container {
-            max-width: 850px;
-            width: 100%;
-            margin: 0 auto;
-        }
-
-        h1 {
-            text-align: center;
-            font-size: 4em;
-            color: #00c3ff;
-            text-shadow: 3px 3px 0px rgba(0,0,0,0.7);
-            background-color: rgba(0, 0, 0, 0.4);
-            padding: 0;
-            border: 2px solid #1a1a1a;
-            border-radius: 4px;
-            margin: 20px 0;
-        }
-
-        h2 {
-            color: #00c3ff;
-            font-size: 2.2em;
-            background-color: rgba(0, 0, 0, 0.4);
-            padding: 0;
-            border: 1px solid #1a1a1a;
-            width: fit-content;
-            margin-bottom: 10px;
-        }
-
-        .content-box {
-            background-color: rgba(0, 0, 0, 0.4);
-            padding: 15px 30px;
-            border: 1px solid #1a1a1a;
-            border-radius: 3px;
-            margin-bottom: 25px;
-            font-size: 1.5em; /* Larger for terminal font readability */
-        }
-
-        ul, ol {
-            margin: 0;
-            padding-left: 25px;
-        }
-
-        li {
-            margin-bottom: 8px;
-        }
-
-        .staff-list {
-            color: #FFD700;
-            font-weight: bold;
-        }
-
-        /* Dancing Tony Styling */
-        .footer {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-top: 20px;
-        }
-
-        .gif-img {
-            width: 100px;
-            height: 100px;
-            border: 2px solid #1a1a1a;
-            box-shadow: 4px 4px 0px rgba(0,0,0,0.5);
-        }
-
-        /* Hide elements by default for localization switching */
-        .lang-en, .lang-es {
-            display: none;
-        }
-    </style>
-</head>
 <body>
     <div class="container">
         <h1>Lo Que Pinte Gaming - SandBox</h1>
 
+        <!-- ==================== LANGUAGE SELECTOR SCREEN ==================== -->
+        <div id="lang-screen" class="content-box" style="text-align: center;">
+            <h2>Select Language / Selecciona Idioma</h2>
+            <p>Please choose your preferred language to view the MOTD.</p>
+            <p>Por favor, elige tu idioma preferido para ver el MOTD.</p>
+            <div style="display: flex; justify-content: center; gap: 20px; margin-top: 20px;">
+                <button onclick="selectLanguage('en')" style="background-color: rgba(0, 195, 255, 0.1); color: #00c3ff; border: 2px solid #00c3ff; padding: 10px 30px; font-family: 'DEC Terminal Modern', 'VT323', monospace; font-size: 1.2em; cursor: pointer; border-radius: 4px; box-shadow: 3px 3px 0px rgba(0,0,0,0.5);">ENGLISH</button>
+                <button onclick="selectLanguage('es')" style="background-color: rgba(0, 195, 255, 0.1); color: #00c3ff; border: 2px solid #00c3ff; padding: 10px 30px; font-family: 'DEC Terminal Modern', 'VT323', monospace; font-size: 1.2em; cursor: pointer; border-radius: 4px; box-shadow: 3px 3px 0px rgba(0,0,0,0.5);">ESPAÑOL</button>
+            </div>
+        </div>
+
         <!-- ==================== ENGLISH VERSION ==================== -->
-        <div id="motd-en" class="lang-en">
+        <div id="motd-en" style="display: none;">
             <div class="content-box">
                 <h2>Message of the Day : "Bogos Binted"</h2>
                 <p></p>
-                <p>Seeing Errors Everywhere?</p>
+                <p>Seeing Errors Everywhere? Download our addons!</p>
                 <ul>
                     <li>https://steamcommunity.com/sharedfiles/filedetails/?id=3626045213 - Models & maps</li>
                     <li>https://steamcommunity.com/sharedfiles/filedetails/?id=3626058425 - Vehicles & sweps</li>
                 </ul>
                 <p>Changelog</p>
                 <ul>
-                    <li> New Loading screen </li>
+                    <li>Localized MOTD and New loading screen</li>
                 </ul>
             </div>
 
@@ -124,58 +41,111 @@
                     <li>Please Refrain from Harassing Other Players</li>
                 </ul>
             </div>
+
+            <div class="content-box">
+                <h2>Staff</h2>
+                <ul class="staff-list">
+                    <li>SandMan — Owner</li>
+                </ul>
+            </div>
+            
+            <div class="content-box">
+                <h2>Commands</h2>
+                <ul>
+                    <li><strong>!rtv</strong> - Vote to Change the Current Map</li>
+                    <li><strong>!menu</strong> - Open the Command Menu</li>
+                    <li><strong>!goto</strong> - Teleport yourself to someone (Experienced or above required)</li>
+                    <li><strong>Put @ Before your Message</strong> - To leave a message to staff</li>
+                </ul>
+            </div>
+
+            <div class="content-box">
+                <h2>User Ranks</h2>
+                <ul>
+                    <li><strong>Regular</strong> - Can be obtained by being regularly in the server (at least 5 hours of playtime required)</li>
+                    <li><strong>Experienced</strong> - Will be obtained after 8 hours of playtime</li>
+                    <li><strong>Veteran</strong> - Will be given after 3 days (total) of playtime</li>
+                    <li><strong>PAC3 - God</strong> - Will be given to you if you are good with PAC3 or Wiremod (Unlocks Combat PAC3 Modules & lifts some limitations on E2)</li>
+                </ul>
+            </div>
         </div>
 
         <!-- ==================== SPANISH VERSION ==================== -->
-        <div id="motd-es" class="lang-es">
+        <div id="motd-es" style="display: none;">
             <div class="content-box">
                 <h2>Mensaje del Día : "Bogos Binted"</h2>
                 <p></p>
-                <p>¿Viendo Errores?</p>
+                <p>¿Viendo Errores? Descarga Los addons desde la coleccions</p>
                 <ul>
                     <li>https://steamcommunity.com/sharedfiles/filedetails/?id=3626045213 - Modelos y mapas</li>
                     <li>https://steamcommunity.com/sharedfiles/filedetails/?id=3626058425 - Vehículos y sweps</li>
                 </ul>
-                <p>Actualizaciones</p>
+                <p>Novedades:</p>
                 <ul>
-                    <li>Nueva pantalla de carga :v</li>
+                    <li>Nueva pantalla de carga</li>
                 </ul>
             </div>
 
             <div class="content-box">
                 <h2>Reglas</h2>
                 <ul>
-                    <li>No ser imbecil y molestar a los demás</li>
-                    <li>Por favor, no arruines la experiencia de nadie. Ej: (Spam de micrófono, Cárceles con Wire, Prop Push / Prop Kill).</li>
+                    <li>No Molestar a los jugadores</li>
+                    <li>Por favor, no arruines la experiencia de nadie. Ej: (Spam de micrófono, Wire jail, Prop Push / Prop Kill).</li>
                     <li>NO CRASHEES EL SERVIDOR (BAN PERMANENTE).</li>
-                    <li>Tolerancia cero absoluta con materiales / sprays NSFW/NFSL.</li>
+                    <li>No usar materiales / sprays NSFW/NFSL.</li>
                     <li>Por favor, no abusar de PAC3 o WIREMOD.</li>
+                </ul>
+            </div>
+
+            <div class="content-box">
+                <h2>Staff</h2>
+                <ul class="staff-list">
+                    <li>SandMan — Dueño</li>
+                </ul>
+            </div>
+            
+            <div class="content-box">
+                <h2>Comandos</h2>
+                <ul>
+                    <li><strong>!rtv</strong> - Votar para cambiar el mapa actual</li>
+                    <li><strong>!menu</strong> - Abrir el menú de comandos</li>
+                    <li><strong>!goto</strong> - Hacerte tp a alguien (Se requiere rango Experimentado o superior)</li>
+                    <li><strong>Pon un @ antes de tu mensaje</strong> - Para dejarle un mensaje al Staff</li>
+                </ul>
+            </div>
+
+            <div class="content-box">
+                <h2>Rangos</h2>
+                <ul>
+                    <li><strong>Regular</strong> - Se obtiene estando en el server (se requieren al menos 5 horas de juego)</li>
+                    <li><strong>Experimentado</strong> - Se obtiene después de 8 horas de juego</li>
+                    <li><strong>Veterano</strong> - Se otorgará después de 3 días (totales) de tiempo de juego</li>
+                    <li><strong>PAC3 - God</strong> - Se te otorgará si eres bueno con PAC3 o Wiremod (Desbloquea módulos de combate de PAC3 y elimina algunas limitaciones de E2)</li>
                 </ul>
             </div>
         </div>
 
-        <!-- Staff box stays visible for both since it was cut off/incomplete -->
-        <div class="content-box">
-            <h2>Staff</h2>
-            <ul class="staff-list">
-                <li>Owner: SandmanMcCoy</li>
-                <li>Co-Owner: N/A</li>
-                <li>Admin: N/A</li>
-                <li>Moderator: N/A</li>
-            </ul>
+        <!-- Shared Footer (Hidden until a language is clicked) -->
+        <div id="shared-footer" class="footer" style="display: none;">
+            <img src="res/dancingtony.gif" alt="Dancing Tony" class="gif-img">
         </div>
-
     </div>
 
-    <!-- Script to auto-detect language -->
+    <!-- Script to handle manual language choice -->
     <script>
-        const userLang = navigator.language || navigator.userLanguage; 
-        
-        if (userLang.startsWith('es')) {
-            document.getElementById('motd-es').style.display = 'block';
-        } else {
-            document.getElementById('motd-en').style.display = 'block'; // Default to English
+        function selectLanguage(lang) {
+            // Hide the selection screen overlay
+            document.getElementById('lang-screen').style.display = 'none';
+            
+            // Unhide the dancing Tony footer
+            document.getElementById('shared-footer').style.display = 'flex';
+
+            // Show chosen translation map
+            if (lang === 'es') {
+                document.getElementById('motd-es').style.display = 'block';
+            } else {
+                document.getElementById('motd-en').style.display = 'block';
+            }
         }
     </script>
 </body>
-</html>
