@@ -52,30 +52,44 @@
             to { transform: scale(1.15); }
         }
 
-        /* --- THE SPINNING GMOD BOX --- */
-        .gmod-loader {
+        /* --- CENTERED UI WRAPPER --- */
+        .center-ui {
             position: absolute;
             top: 50%;
             left: 50%;
-            /* Offset by half of the new 60px size to center it perfectly */
-            margin-top: -30px; 
-            margin-left: -30px;
-            width: 60px;
-            height: 60px;
+            transform: translate(-50%, -50%);
+            z-index: 5; /* Keep it above the changing slides */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px; /* Space between the avatar and the spinning box */
+        }
+
+        /* Steam Avatar Image */
+        .avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        /* --- THE SPINNING GMOD BOX --- */
+        .gmod-loader {
+            width: 45px;
+            height: 45px;
             background-color: #ffd1dc; 
-            border: 3px solid #ffa3b1;
-            z-index: 5; 
+            border: 2px solid #ffa3b1;
             display: flex;
             justify-content: center;
             align-items: center;
-            /* Changed from 1.5s to 3.5s for a much slower, relaxed spin */
             animation: gmodSpin 3.5s linear infinite;
-            box-shadow: 0 0 12px rgba(0,0,0,0.4);
+            box-shadow: 0 0 10px rgba(0,0,0,0.4);
         }
 
         .gmod-loader span {
             color: #333;
-            font-size: 1.6rem; /* Slightly smaller text to scale with the box */
+            font-size: 1.2rem; /* Adjusted text size for smaller box */
             font-weight: bold;
             font-family: monospace;
             animation: gmodSpinCounter 3.5s linear infinite;
@@ -94,8 +108,11 @@
 </head>
 <body>
 
-    <div class="gmod-loader">
-        <span>:3</span>
+    <div class="center-ui">
+        <img class="avatar" src="https://avatars.fastly.steamstatic.com/886b8a5d2e6d793de4d93e2704965e52ed52d944_full.jpg" alt="Avatar">
+        <div class="gmod-loader">
+            <span>:3</span>
+        </div>
     </div>
 
     <div id="slideshow-container">
@@ -161,12 +178,10 @@
             setTimeout(nextSlide, displayDuration);
         }
 
-        // Detect when the current song ends, then queue up another random track
         audioPlayer.onended = function() {
             playRandomMusic();
         };
 
-        // Initialize everything instantly on load
         setupSlideshow();
         nextSlide();
         playRandomMusic();
