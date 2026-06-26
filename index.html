@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Infinite Zoom Slideshow</title>
+    <title>GMod Loading Screen</title>
     <style>
         * {
             box-sizing: border-box;
@@ -57,33 +57,25 @@
             position: absolute;
             top: 50%;
             left: 50%;
-            /* Offset by half the width/height to center perfectly */
             margin-top: -40px; 
             margin-left: -40px;
             width: 80px;
             height: 80px;
-            
-            /* Slightly pink-tinted yellow */
             background-color: #ffd1dc; 
             border: 4px solid #ffa3b1;
-            
-            z-index: 5; /* Sits above the images */
+            z-index: 5; 
             display: flex;
             justify-content: center;
             align-items: center;
-            
-            /* Classic continuous Gmod rotation */
             animation: gmodSpin 1.5s linear infinite;
             box-shadow: 0 0 15px rgba(0,0,0,0.5);
         }
 
-        /* The text inside the box */
         .gmod-loader span {
             color: #333;
             font-size: 2.2rem;
             font-weight: bold;
             font-family: monospace;
-            /* Keep the text upright while the box spins around it */
             animation: gmodSpinCounter 1.5s linear infinite;
         }
 
@@ -96,46 +88,9 @@
             from { transform: rotate(0deg); }
             to { transform: rotate(-360deg); }
         }
-
-        /* Audio Interaction Overlay */
-        #start-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.85);
-            z-index: 10;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: white;
-            cursor: pointer;
-            text-align: center;
-        }
-
-        .start-btn {
-            padding: 15px 30px;
-            font-size: 1.2rem;
-            background: #fff;
-            color: #000;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: transform 0.2s;
-        }
-
-        .start-btn:hover { transform: scale(1.05); }
     </style>
 </head>
 <body>
-
-    <div id="start-overlay" onclick="startSlideshow()">
-        <div>
-            <button class="start-btn">Click to Start Slideshow & Music</button>
-        </div>
-    </div>
 
     <div class="gmod-loader">
         <span>:3</span>
@@ -171,7 +126,6 @@
         let currentSlideIndex = 0;
         const container = document.getElementById('slideshow-container');
         const audioPlayer = document.getElementById('bg-music');
-        const overlay = document.getElementById('start-overlay');
 
         function setupSlideshow() {
             images.forEach((imgUrl) => {
@@ -186,10 +140,7 @@
             if (audioTracks.length === 0) return;
             const randomIndex = Math.floor(Math.random() * audioTracks.length);
             audioPlayer.src = audioTracks[randomIndex];
-            
-            audioPlayer.play().catch(error => {
-                console.log("Audio playback failed: ", error);
-            });
+            audioPlayer.play();
         }
 
         function nextSlide() {
@@ -208,13 +159,10 @@
             setTimeout(nextSlide, displayDuration);
         }
 
-        function startSlideshow() {
-            overlay.style.display = 'none';
-            playRandomMusic();
-            nextSlide();
-        }
-
+        // Initialize everything instantly on load
         setupSlideshow();
+        nextSlide();
+        playRandomMusic();
     </script>
 </body>
 </html>
