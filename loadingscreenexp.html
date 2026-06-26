@@ -33,7 +33,6 @@
             left: 0;
             width: 100%;
             height: 100%;
-            /* Changed from 'cover' to 'contain' to make the whole image fit the screen */
             background-size: contain;
             background-repeat: no-repeat;
             background-position: center;
@@ -120,6 +119,7 @@
         const images = [
             'res/loadingscreens/backimg (1).png',
             'res/loadingscreens/backimg (1).jpg',
+            'res/loadingscreens/backimg (2).png',
             'res/loadingscreens/backimg (2).jpg',
             'res/loadingscreens/backimg (3).jpg',
             'res/loadingscreens/backimg (4).jpg',
@@ -175,7 +175,18 @@
         const container = document.getElementById('slideshow-container');
         const audioPlayer = document.getElementById('bg-music');
 
+        // Helper function to shuffle an array randomly
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
         function setupSlideshow() {
+            // Shuffle the image sequence before building the slideshow elements
+            shuffleArray(images);
+
             images.forEach((imgUrl) => {
                 const slide = document.createElement('div');
                 slide.classList.add('slide');
@@ -211,6 +222,7 @@
             playRandomMusic();
         };
 
+        // Initialize everything instantly on load
         setupSlideshow();
         nextSlide();
         playRandomMusic();
