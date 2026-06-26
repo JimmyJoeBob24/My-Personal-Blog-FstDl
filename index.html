@@ -57,26 +57,28 @@
             position: absolute;
             top: 50%;
             left: 50%;
-            margin-top: -40px; 
-            margin-left: -40px;
-            width: 80px;
-            height: 80px;
+            /* Offset by half of the new 60px size to center it perfectly */
+            margin-top: -30px; 
+            margin-left: -30px;
+            width: 60px;
+            height: 60px;
             background-color: #ffd1dc; 
-            border: 4px solid #ffa3b1;
+            border: 3px solid #ffa3b1;
             z-index: 5; 
             display: flex;
             justify-content: center;
             align-items: center;
-            animation: gmodSpin 1.5s linear infinite;
-            box-shadow: 0 0 15px rgba(0,0,0,0.5);
+            /* Changed from 1.5s to 3.5s for a much slower, relaxed spin */
+            animation: gmodSpin 3.5s linear infinite;
+            box-shadow: 0 0 12px rgba(0,0,0,0.4);
         }
 
         .gmod-loader span {
             color: #333;
-            font-size: 2.2rem;
+            font-size: 1.6rem; /* Slightly smaller text to scale with the box */
             font-weight: bold;
             font-family: monospace;
-            animation: gmodSpinCounter 1.5s linear infinite;
+            animation: gmodSpinCounter 3.5s linear infinite;
         }
 
         @keyframes gmodSpin {
@@ -99,7 +101,7 @@
     <div id="slideshow-container">
         </div>
 
-    <audio id="bg-music" loop></audio>
+    <audio id="bg-music"></audio>
 
     <script>
         const images = [
@@ -140,7 +142,7 @@
             if (audioTracks.length === 0) return;
             const randomIndex = Math.floor(Math.random() * audioTracks.length);
             audioPlayer.src = audioTracks[randomIndex];
-            audioPlayer.play();
+            audioPlayer.play().catch(e => console.log("Audio play error:", e));
         }
 
         function nextSlide() {
@@ -158,6 +160,11 @@
 
             setTimeout(nextSlide, displayDuration);
         }
+
+        // Detect when the current song ends, then queue up another random track
+        audioPlayer.onended = function() {
+            playRandomMusic();
+        };
 
         // Initialize everything instantly on load
         setupSlideshow();
