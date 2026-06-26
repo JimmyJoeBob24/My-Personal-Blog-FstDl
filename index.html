@@ -58,11 +58,11 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            z-index: 5; /* Keep it above the changing slides */
+            z-index: 5; 
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 15px; /* Space between the avatar and the spinning box */
+            gap: 15px; /* Adjusts space between avatar and the spinning square */
         }
 
         /* Steam Avatar Image */
@@ -76,33 +76,28 @@
 
         /* --- THE SPINNING GMOD BOX --- */
         .gmod-loader {
-            width: 45px;
-            height: 45px;
+            width: 28px;
+            height: 28px;
             background-color: #ffd1dc; 
-            border: 2px solid #ffa3b1;
+            border: 3px solid #ffa3b1;
             display: flex;
             justify-content: center;
             align-items: center;
-            animation: gmodSpin 3.5s linear infinite;
-            box-shadow: 0 0 10px rgba(0,0,0,0.4);
+            animation: gmodSpin 5.5s linear infinite;
+            box-shadow: 0 0 12px rgba(0,0,0,0.4);
         }
 
         .gmod-loader span {
             color: #333;
-            font-size: 1.2rem; /* Adjusted text size for smaller box */
+            font-size: 0.6rem; 
             font-weight: bold;
             font-family: monospace;
-            animation: gmodSpinCounter 5.5s linear infinite;
+            /* Counter-rotation animation removed so it spins naturally with the parent box */
         }
 
         @keyframes gmodSpin {
             from { transform: rotate(0deg); }
             to { transform: rotate(360deg); }
-        }
-
-        @keyframes gmodSpinCounter {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(-360deg); }
         }
     </style>
 </head>
@@ -212,10 +207,12 @@
             setTimeout(nextSlide, displayDuration);
         }
 
+        // Detect when the current song ends, then queue up another random track
         audioPlayer.onended = function() {
             playRandomMusic();
         };
 
+        // Initialize everything instantly on load
         setupSlideshow();
         nextSlide();
         playRandomMusic();
