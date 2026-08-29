@@ -218,6 +218,7 @@
             if (audioTracks.length === 0) return;
             const randomIndex = Math.floor(Math.random() * audioTracks.length);
             audioPlayer.src = audioTracks[randomIndex];
+            audioPlayer.volume = 0.58;
             audioPlayer.play().catch(e => console.log("Audio play error:", e));
         }
 
